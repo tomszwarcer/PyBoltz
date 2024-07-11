@@ -6,5 +6,5 @@ dependencies = ["PyGasMix"]
 
 [build-system]
 # add your path to PyGasMix:
-requires = ["setuptools", "Cython==0.29.37", "numpy==1.22.0", "PyGasMix @ file:///path/to/PGM""]
+requires = ["setuptools", "Cython==0.29.37", "numpy==1.22.0", "PyGasMix @ file:///path/to/PGM"]
 build-backend = "setuptools.build_meta"
