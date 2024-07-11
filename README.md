@@ -1,4 +1,3 @@
-![PyBoltz_Tests](https://github.com/UTA-REST/PyBoltz/workflows/PyBoltz_Tests/badge.svg)
 # PyBoltz
 This software package is a translation of the Fortran based Magboltz code (Biagi, 2001) into Cython. This project was built to allow for more productive work to be done with magboltz.
 
@@ -6,7 +5,7 @@ This software package is a translation of the Fortran based Magboltz code (Biagi
 
 ### About PyBoltz ###
 
-PyBoltz is an electron swarm Monte Carlo package for calcualting transport parameters of electrons in different gas mixtures that are relevant to particle detectors.
+PyBoltz is an electron swarm Monte Carlo package for calculating transport parameters of electrons in different gas mixtures that are relevant to particle detectors.
 
 To cite PyBoltz, and for more information:
 
@@ -22,44 +21,60 @@ The Magboltz program computes drift gas properties by "numerically integrating t
 ### Why Cython?
 Cython's static typing improves the speed of python code by about a hundred times. In other words, Cython provides us with the simplicity of python and the speed of Fortran/C. [Read more](https://cython.org/).
 
-## Setting up and running instructions. 
+## Installing PyBoltz
 
-### Setting up.
-To be able to run this project you will need python3+, cython, and numpy installed. Our setup has python 3.6.7, Cython 0.29.3, and numpy 1.16.1. 
+- There are probably better ways of doing this but this is the first way I found that worked and was reproducible.
 
-### First method.
-For simple running purposes, one can simply install PyBoltz using the following command. **Note: This method needs a new version of PIP.**
+### Requirements
 
-```
-python3 -m pip install --upgrade  git+https://github.com/UTA-REST/PyBoltz.git --user
-```
+- This has only been reliably achieved/tested on Python 3.9.18, which is the version installed on Mercury and the Linux PCs.
+- Requires `numpy 1.22.0`, `Cython 0.29.37` `setuptools` and `build`. The first three should be handled automatically by the installation process, but you should install them separately anyway as they are installed in a virtual environment which is only used in the installation process.
 
-### Second method.
-For developing purposes, follow the steps below.
+### Procedure
 
-#### Cloning.
-Start off by simply cloning this repository. 
-
-#### Gasmix module.
-Before building the code make sure to run the following command to install the PyGasMix module.
+#### 1. Install `numpy 1.22.0`, `Cython 0.29.37` `setuptools` and `build`
 
 ```
-$ sudo pip3 install --upgrade  git+https://github.com/UTA-REST/PyGasMix --user
+$ python3 -m pip install numpy==1.22.0
+$ python3 -m pip install Cython==0.29.37
+$ python3 -m pip install setuptools
+$ python3 -m pip install build
 ```
 
-**Notice** If you are planning to develop upon the Gasmix module as well, you should be installing the PyGasMix module by following the steps in the repository link below. (steps detailed in the readme).
-[PyGasMix](https://github.com/UTA-REST/GasMix).
+- You may need to add `--user` to the end of these commands if installing on a shared system (this was needed to install locally on the Linux machine)
 
-
-#### Building.
-Finally, to build the code, run the following command. This should compile all of the Cython files and add the path of the repository directory to your PYTHONPATH so you can access the libraries from anywhere. This will take a few minutes the first time.
+#### 2. Clone PyGasMix and PyBoltz from Github
 
 ```
-$ source setup.sh
+$ git clone git@github.com:tomszwarcer/PyGasMix.git
+$ git clone git@github.com:tomszwarcer/PyBoltz.git
+``` 
+
+#### 3. Install PyGasMix
+
+- From within your PyGasMix directory, run
+
+```
+$ python3 -m build
+$ python3 -m pip install .
 ```
 
-Please note that you might need to change the commands inside the setup.sh file to match your python version.
+#### 4. Install PyBoltz
 
+- From within your PyBoltz directory, open `pyproject.toml`.
+- Under `[build-system]` change the path to PyGasMix to match the location of your PyGasMix directory (I will make a script that does this automatically in future). Save the file.
+- Run the following:
+
+```
+$ python3 -m build
+$ python3 -m pip install .
+```
+
+#### 5. Test
+
+```
+$ python3 examples/Example.py 
+```
 ### Running PyBoltz.
 To run the code, you will need to import PyBoltz and instantiate an instance of the PyBoltz object, fill in the input parameters and call the PyBoltz.Start() function. There are examples in the Examples directory on to how to use PyBoltz. The main example is the Test_PyBoltz_NoWrapper.py code. This example also has a list of the gases in PyBoltz.
 
@@ -150,22 +165,6 @@ The current PyBoltz version has the following gases. Please note that the number
 * **DME** Gas # 25.
 * **XenonMert** Gas # 61 (This gas requires extra parameters, check /Examples/Test_PyBoltz_mert.py).
 
-## Testing
-To be able to run the tests for this module, you will need to have pytest installed on your machine. Also, you need to run the following to install the testing data package. 
-```
-$ sudo pip3 install --upgrade  git+https://github.com/UTA-REST/PyBoltz_Test_Data --user
-```
 
-
-After doing so, go to the test directory and run the following. 
-```
-$ pytest
-```
-This will run all the tests. If you are intrested in a single test, add the name of the testing python file to the end of the above command. 
-
-For more information on the testing data package, check the following repository. 
-[Testing Data Package](https://github.com/UTA-REST/PyBoltz_Test_Data).
-
-
-## Documentaion link
-[Documentaion...](https://uta-rest.github.io/PyBoltz-Documentation/html/).
+## Documentation link
+[Documentation...](https://uta-rest.github.io/PyBoltz-Documentation/html/).
