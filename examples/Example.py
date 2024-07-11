@@ -1,5 +1,4 @@
 import numpy as np
-import pylab
 import time
 from pathlib import Path
 from PyBoltz.PyBoltzRun import *

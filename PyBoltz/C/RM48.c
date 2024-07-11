@@ -26,7 +26,14 @@ double NTOT2N = 0,NTOTIN =0 ,NTOT=-1, NTOT2=0;
 extern void RM48(double LENV){
   long MODCNS = 1000000000;
   double T,S,HALF,UNI;
-  long long I,J,K,L,M,NOW,IJ,KL;
+  long long IJ = 0;
+  long long I_redef = 0;
+  long long J = 0;
+  long long K = 0;
+  long long L = 0;
+  long long M = 0;
+  long long NOW = 0;
+  long long KL = 0;
   static double CD, CM, TWOM24,TWOM49 ,ONE, ZERO;
   static long long IJKL=0;
   int II,JJ,I24,LOOP2,IDUM;
@@ -39,7 +46,7 @@ extern void RM48(double LENV){
 
   IJ = IJKL/30082;
   KL = IJKL - 30082*IJ;
-  I = MOD(IJ/177, 177) + 2;
+  I_redef = MOD(IJ/177, 177) + 2;
   J = MOD(IJ, 177)     + 2;
   K = MOD(KL/169, 178) + 1;
   L = MOD(KL, 169);
@@ -50,8 +57,8 @@ extern void RM48(double LENV){
   S = 0.;
   T = HALF;
   for(JJ= 1;JJ<= 48;++JJ){
-    M = MOD(MOD(I*J,179)*K, 179);
-    I = J;
+    M = MOD(MOD(I_redef*J,179)*K, 179);
+    I_redef = J;
     J = K;
     K = M;
     L = MOD(53*L+1, 169);

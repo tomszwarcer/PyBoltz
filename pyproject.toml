@@ -1,0 +1,10 @@
+[project]
+name = "PyBoltz"
+version = "1.2.0"
+requires-python = ">=3.8"
+dependencies = ["PyGasMix"]
+
+[build-system]
+# add your path to PyGasMix:
+requires = ["setuptools", "Cython==0.29.37", "numpy==1.22.0", "PyGasMix @ file:///Users/tomszwarcer/Documents/programming/gas/PyGasMix"]
+build-backend = "setuptools.build_meta"
