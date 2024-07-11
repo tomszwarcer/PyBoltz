@@ -27,7 +27,7 @@ Cython's static typing improves the speed of python code by about a hundred time
 
 ### Requirements
 
-- This has only been reliably achieved/tested on Python 3.9.18, which is the version installed on Mercury and the Linux PCs.
+- This has only been reliably achieved/tested on Python 3.9.18.
 - Requires `numpy 1.22.0`, `Cython 0.29.37` `setuptools` and `build`. The first three should be handled automatically by the installation process, but you should install them separately anyway as they are installed in a virtual environment which is only used in the installation process.
 
 ### Procedure
